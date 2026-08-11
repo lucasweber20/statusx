@@ -31,7 +31,14 @@ def main():
         for future in concurrent.futures.as_completed(futures):
             result = future.result()
             if result:
-                print(result[1])
+                if result[1] >= 200 and result[1] < 300:
+                    print(f"{result[0]} -> \033[92m{result[1]}\033[00m")
+                elif result[1] >= 300 and result[1] < 400:
+                    print(f"{result[0]} -> \033[36m{result[1]}\033[00m")
+                elif result[1] >= 400 and result[1] < 500:
+                    print(f"{result[0]} -> \033[33m{result[1]}\033[00m")
+                elif result[1] >= 500 and result[1] < 600:
+                    print(f"{result[0]} -> \033[31m{result[1]}\033[00m")
 
 def requests_urls(url):
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"}
