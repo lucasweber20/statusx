@@ -25,6 +25,14 @@ def main():
         for file in f:
             urls.append(file.strip())
 
+    # Requests
+    with concurrent.futures.ThreadPoolExecutor(max_workers=THREAD) as executor:
+        futures = [executor.submit(requests_urls, url) for url in urls]
+        for future in concurrent.futures.as_completed(futures):
+            result = future.result()
+            if result:
+                print(result[1])
+
 def requests_urls(url):
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"}
     try:
