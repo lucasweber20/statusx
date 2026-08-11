@@ -30,7 +30,6 @@ def main():
         futures = [executor.submit(requests_urls, url) for url in urls]
         for future in concurrent.futures.as_completed(futures):
             result = future.result()
-            print("teste")
             if result:
                 if result[1] >= 200 and result[1] < 300:
                     print(f"{result[0]} -> \033[92m{result[1]}\033[00m")
